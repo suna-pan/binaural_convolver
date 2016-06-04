@@ -1,3 +1,4 @@
 ﻿Gemfile.lock
 *.swp
 *.js
+.vscode
