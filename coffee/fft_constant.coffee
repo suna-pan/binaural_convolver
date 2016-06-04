@@ -1,4 +1,4 @@
-window._fft_constant_w = [new window.Complex(-1.0, 0.0),
+﻿window._fft_constant_w = [new window.Complex(-1.0, 0.0),
 new window.Complex(6.123233995736766e-17, -1.0),
 new window.Complex(0.7071067811865476, -0.7071067811865475),
 new window.Complex(0.9238795325112867, -0.3826834323650898),
