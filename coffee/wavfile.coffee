@@ -89,7 +89,9 @@ class window.WavFile
       fail(1)
 
   next512: (success, fail) ->
+    blockBound = @header.fmtBlockBound
     bytePerSample = @header.fmtBitPerSample / 8
+    bp2 = bytePerSample * 2
     ch = @header.fmtCh
     refSize = bytePerSample * 512 * ch
     last = false
@@ -99,15 +101,20 @@ class window.WavFile
       raw = evt.target.result
       data = new Uint8Array(raw)
 
-      result = [0...data.length]
-      for i in [0...data.length]
+      result = [0...data.length / (ch * bytePerSample)]
+      for i in [0...data.length / (ch * bytePerSample)]
         if ch == 1
-          result[i] = new window.Complex(littleEndian.call(@, data.slice(i * bytePerSample, i * bytePerSample + bytePerSample)), 0)
+          tmp = new window.Complex(littleEndian.call(@, data.slice(i * blockBound, i * blockBound + bytePerSample)), 0)
+          result[i] = [tmp, tmp]
         else
-          bp2 = bytePerSample * 2
-          tmpL = littleEndian.call(@, data.slice(i * bp2, i * bp2 + bytePerSample))
-          tmpR = littleEndian.call(@, data.slice(i * bp2 + bytePerSample, i * bp2 + bp2))
+          tmpL = littleEndian.call(@, data.slice(i * blockBound, i * blockBound + bytePerSample))
+          tmpR = littleEndian.call(@, data.slice(i * blockBound + bytePerSample, i * blockBound + bp2))
           result[i] = [new window.Complex(tmpL, 0), new window.Complex(tmpR, 0)]
+          
+        #if result[i][0].re > 0x0ffff
+        #  result[i][0].re = ~(result[i][0].re - 1)
+        #if result[i][1].re > 0x0ffff
+        #  result[i][1].re = ~(result[i][1].re - 1)
           
        success(last, result, refSize)
     
@@ -129,3 +136,15 @@ class window.WavFile
       reader.readAsArrayBuffer(blob)
     else
       fail(1)
+
+  # 16bit 44100Hz
+  genWavHeader: (waveSize) ->
+    fileSize = waveSize + WAV_HEADER_LENGTH - 8
+    buf  = String.fromCharCode(0x52, 0x49, 0x46, 0x46)
+    buf += String.fromCharCode(fileSize & 0xff, (fileSize >> 8) & 0xff, (fileSize >> 16) & 0xff, (fileSize >> 24) & 0xff)
+    buf += String.fromCharCode(0x57, 0x41, 0x56, 0x45, 0x66, 0x6d, 0x74, 0x20,
+                               0x10, 0x00, 0x00, 0x00, 0x01, 0x00, 0x02, 0x00,
+                               0x44, 0xac, 0x00, 0x00, 0x10, 0xb1, 0x02, 0x00
+                               0x04, 0x00, 0x10, 0x00, 0x64, 0x61, 0x74, 0x61)
+    buf += String.fromCharCode(waveSize & 0xff, (waveSize >> 8) & 0xff, (waveSize >> 16) & 0xff, (waveSize >> 24) & 0xff)
+    return buf

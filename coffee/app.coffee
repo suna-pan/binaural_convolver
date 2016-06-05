@@ -2,6 +2,7 @@
   file = null
   src_wav = null
   
+  audio = document.getElementById("audio")
   
   $('#file_selecter').change ->
     file = this.files[0]
@@ -12,10 +13,15 @@
     
     src_wav = new window.WavFile(file)
     
+    bytes = ''
     wav_load_sccuess = (header) ->
       sc = (last, result, refSize) ->
+        for i in result
+          bytes += String.fromCharCode(i[0].re & 0xff, (i[0].re >> 8) & 0xff)
+          bytes += String.fromCharCode(i[1].re & 0xff, (i[1].re >> 8) & 0xff)
         if last
-          alert result[result.length - 1][0].re + ' ' + result[result.length - 1][0].im
+          wav = btoa(src_wav.genWavHeader(bytes.length) + bytes)
+          audio.src = 'data:audio/wav;base64,' + wav
         else
           src_wav.next512(sc, null)
           
