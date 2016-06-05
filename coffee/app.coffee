@@ -13,8 +13,15 @@
     src_wav = new window.WavFile(file)
     
     wav_load_sccuess = (header) ->
-      alert header.fmtSamplingRate
-      alert header.fmtCh
+      sc = (last, result, refSize) ->
+        if last
+          alert result[result.length - 1][0].re + ' ' + result[result.length - 1][0].im
+        else
+          src_wav.next512(sc, null)
+          
+      src_wav.next512(sc, null)
+      
+      
 
     wav_load_fail = (code) ->
       if code == 1
