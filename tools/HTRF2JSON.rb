@@ -88,13 +88,13 @@ while elev <= 90
     resR = fft(dir + fnameR, index, w)
 
     json = "{\n"
-    json += "point: 1023,\n"
-    json += "samplingRate: 44100,\n"
-    json += "elev: " + elev.to_s + ",\n"
-    json += "angle: " + angle.to_s + ",\n"
-    json += "hL: [\n"
+    json += "\"point\": 1023,\n"
+    json += "\"samplingRate\": 44100,\n"
+    json += "\"elev\": " + elev.to_s + ",\n"
+    json += "\"angle\": " + angle.to_s + ",\n"
+    json += "\"hL\": [\n"
     resL.each_with_index do |item, index|
-      json += "{re: %f, im: %f}"%[item.real, item.imaginary]
+      json += "{\"re\": %.15f, \"im\": %.15f}"%[item.real, item.imaginary]
       if index != 1023
         json += ','
       end
@@ -102,9 +102,9 @@ while elev <= 90
     end
     json += "],\n"
 
-    json += "hR: [\n"
+    json += "\"hR\": [\n"
     resR.each_with_index do |item, index|
-      json += "{re: %f, im: %f}"%[item.real, item.imaginary]
+      json += "{\"re\": %.15f, \"im\": %.15f}"%[item.real, item.imaginary]
       if index != 1023
         json += ','
       end
