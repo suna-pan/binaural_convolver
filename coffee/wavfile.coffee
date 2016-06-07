@@ -111,10 +111,10 @@ class window.WavFile
           tmpR = littleEndian.call(@, data.slice(i * blockBound + bytePerSample, i * blockBound + bp2))
           result[i] = [new window.Complex(tmpL, 0), new window.Complex(tmpR, 0)]
           
-        #if result[i][0].re > 0x0ffff
-        #  result[i][0].re = ~(result[i][0].re - 1)
-        #if result[i][1].re > 0x0ffff
-        #  result[i][1].re = ~(result[i][1].re - 1)
+        if result[i][0].re > 0x0ffff
+          result[i][0].re = ~(result[i][0].re - 1)
+        if result[i][1].re > 0x0ffff
+          result[i][1].re = ~(result[i][1].re - 1)
           
        success(last, result, refSize)
     

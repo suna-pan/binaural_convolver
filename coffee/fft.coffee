@@ -22,18 +22,19 @@ window.fft_base = (N, log2N, data, index, w) ->
       
   res = [0...1024]
   for i in [0...1024]
-    res[i] = data[d_index[i]]
+    res[i] = data[index[i]]
   
-  data = res
+  for i in [0...1024]
+    data[i] = res[i]
   
   
       
 window.fft1024 = (data) ->
-  fft_base(1024, 10, data, window._fft_const_index, window._fft_const_w)
+  fft_base(1024, 10, data, window._fft_constant_index, window._fft_constant_w)
 
 
 window.ifft1024 = (data) ->
-  fft_base(1024, 10, data, window._fft_const_index, window._fft_const_iw)
+  fft_base(1024, 10, data, window._fft_constant_index, window._fft_constant_iw)
   d = new window.Complex(1024, 0)
   for i in data
     i.divide(d)

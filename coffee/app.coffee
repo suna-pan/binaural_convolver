@@ -37,16 +37,16 @@
       (data) ->
         hrtfL = []
         hrtfR = []
-        for i in 1024
+        for i in [0...1024]
           hrtfL.push(new Complex(data.hL[i].re, data.hL[i].im))
           hrtfR.push(new Complex(data.hR[i].re, data.hR[i].im))
-          
+
         loadWavFail = ->
           alert 'WAVファイルのロードに失敗しました'
           file = null
 
-        bufL = [0...512]
-        bufR = [0...512]
+        oldBufL = []
+        oldBufR = []
         resultWav = ''
         loadWavFirst = (last, result, refSize) ->
           if last
@@ -55,23 +55,36 @@
             return
 
           for i in result
-            bufL.push(new Complex(i[0].re, i[0].im))
-            bufR.push(new Complex(i[1].re, i[1].im))
-            
+            oldBufL.push(new Complex(i[0].re, i[0].im))
+            oldBufR.push(new Complex(i[1].re, i[1].im))
+
+          count = 0
           loadWavLoop = (last, result, refSize) ->
-            bufL = bufL.slice(512,1024)
-            bufR = bufR.slice(512,1024)
+            count++
+            console.log('loop ' + count)
+
+            bufL = []
+            bufR = []
+            for i in [0...512]
+              bufL.push(new Complex(oldBufL[i].re, oldBufL[i].im))
+              bufR.push(new Complex(oldBufR[i].re, oldBufR[i].im))
+
+            oldBufL = []
+            oldBufR = []
             for i in result
               bufL.push(new Complex(i[0].re, i[0].im))
               bufR.push(new Complex(i[1].re, i[1].im))
+              oldBufL.push(new Complex(i[0].re, i[0].im))
+              oldBufR.push(new Complex(i[1].re, i[1].im))
             if last
               while bufL.length != 1024
                 bufL.push(new Complex(0, 0))
-              while bufR.length != 1024
-                bufL.push(new Complex(0, 0))
+                bufR.push(new Complex(0, 0))
+                oldBufL.push(new Complex(0, 0))
+                oldBufR.push(new Complex(0, 0))
             
             
-            convol = ->    
+            convol = ->
               fft1024(bufL)
               fft1024(bufR)
             
@@ -81,25 +94,33 @@
               
               ifft1024(bufL)
               ifft1024(bufR)
-            
+
               for i in [512...1024]
-                resultWav += String.fromCharCode(bufL[i].re & 0xff, (bufL[i].re >> 8) & 0xff)
-                resultWav += String.fromCharCode(bufR[i].re & 0xff, (bufR[i].re >> 8) & 0xff)
+                bl = Math.round(bufL[i].re)
+                br = Math.round(bufR[i].re)
+                resultWav += String.fromCharCode(bl & 0xff, (bl >> 8) & 0xff)
+                resultWav += String.fromCharCode(br & 0xff, (br >> 8) & 0xff)
             
             convol()
             
             if last
-              bufL = bufL.slice(512,1024)
-              bufR = bufR.slice(512,1024)
+              bufL = []
+              bufR = []
+              for i in [0...512]
+                bufL.push(new Complex(oldBufL[i].re, oldBufL[i].im))
+                bufR.push(new Complex(oldBufR[i].re, oldBufR[i].im))
               for i in [0...512]
                 bufL.push(new Complex(0, 0))
                 bufR.push(new Complex(0, 0))
                 
               convol()
               wav = btoa(src_wav.genWavHeader(resultWav.length) + resultWav)
+              audio.src = 'data:audio/wav;base64,' + wav
             else
               src_wav.next512(loadWavLoop, loadWavFail)
-        
+
+          src_wav.next512(loadWavLoop, loadWavFail)
+
         src_wav.next512(loadWavFirst, loadWavFail)
     ).fail(
       ->
