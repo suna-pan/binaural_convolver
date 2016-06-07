@@ -115,7 +115,7 @@ class window.WavFile
           result[i][0].re = ~(result[i][0].re - 1)
         if result[i][1].re > 0x0ffff
           result[i][1].re = ~(result[i][1].re - 1)
-          
+
        success(last, result, refSize)
     
     start = @current
