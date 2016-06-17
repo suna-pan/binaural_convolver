@@ -1,4 +1,4 @@
 ﻿Gemfile.lock
 *.swp
-*.js
+public/lib/
 .vscode
