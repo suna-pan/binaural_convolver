@@ -118,7 +118,7 @@
       if angle == 360
         angle = 0
       hrtfFileName = thElev + 'e' + ('00' + angle).slice(-3) + 'a.json'
-    $.getJSON('/json/' + hrtfFileName,
+    $.getJSON('/binaural_convolver/json/' + hrtfFileName,
       (data) ->
         hrtfL = []
         hrtfR = []
