@@ -5,6 +5,34 @@
   playing = false
   
   audio = new Audio()
+
+  audio_pause = ->
+    audio.pause()
+    playing = false
+    $('#audio_play').children('img').attr('src', 'icon_play.png')
+
+
+  audio_play = ->
+    audio.play()
+    playing = true
+    $('#audio_play').children('img').attr('src', 'icon_pause.png')
+
+
+  audio_update_time = (reset)->
+    if reset
+      $('#audio_time').text('00:00/00:00')
+      return
+    cm = Math.floor(audio.currentTime / 60)
+    cs = Math.floor(audio.currentTime) % 60
+    mm = Math.floor(audio.duration / 60)
+    ms = Math.floor(audio.duration) % 60
+
+    if isNaN(mm)
+      mm = 0
+    if isNaN(ms)
+      ms = 0
+    $('#audio_time').text(('0' + cm).slice(-2) + ':' + ('0' + cs).slice(-2) + '/' + ('0' + mm).slice(-2) + ':' + ('0' + ms).slice(-2))
+
   
   $('#file_selecter').change ->
     file = this.files[0]
@@ -34,6 +62,16 @@
     if file == null
       alert 'ファイルを選択してください'
       return
+
+    audio_pause();
+    $('#audio_play').prop('disabled', true)
+    $('#audio_stop').prop('disabled', true)
+    $('#audio_dl').prop('disabled', true)
+    $('#audio_position').slider({
+      max: 0,
+      value: 0
+    })
+    audio_update_time(true)
 
     $.getJSON('/json/0e270a.json',
       (data) ->
@@ -135,21 +173,16 @@
   $('#audio_play').click(
     (e) ->
       if playing
-        audio.pause()
-        playing = false
-        $('#audio_play').children('img').attr('src', 'icon_play.png')
+        audio_pause()
       else
-        audio.play()
-        playing = true
-        $('#audio_play').children('img').attr('src', 'icon_pause.png')
+        audio_play()
   )
 
 
   $('#audio_stop').click(
     (e) ->
-      audio.pause()
+      audio_pause()
       audio.currentTime = 0
-      playing = false
   )
 
 
@@ -165,15 +198,30 @@
   })
 
 
-  audio.addEventListener('durationchange'
+  audio.addEventListener('durationchange',
     ->
       $('#audio_position').slider({ max: Math.ceil(audio.duration * 1000)})
-      
   , false)
 
 
-  audio.addEventListener('timeupdate'
+  audio.addEventListener('canplaythrough',
+    ->
+      audio_update_time(false)
+      $('#audio_play').prop('disabled', false)
+      $('#audio_stop').prop('disabled', false)
+      $('#audio_dl').prop('disabled', false)
+  , false)
+
+
+  audio.addEventListener('timeupdate',
     ->
       $('#audio_position').slider({ value: Math.ceil(audio.currentTime * 1000)})
+      audio_update_time(false)
   , false)
   
+
+  audio.addEventListener('ended',
+    ->
+      audio_pause()
+      audio.currentTime = 0
+  , false)
