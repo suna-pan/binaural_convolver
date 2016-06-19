@@ -82,8 +82,23 @@
     $('#audio_controller').css({
       opacity: '0.3'
     })
+    $('#audio_dl').click(
+      ->
+        return false
+    )
 
-    $.getJSON('/json/0e270a.json',
+
+     
+    window.thAzimuth
+    hrtfFileName = ''
+    if thElev == 90
+      hrtfFileName = '90e000a.json'
+    else
+      angle = 360 - thAzimuth
+      if angle == 360
+        angle = 0
+      hrtfFileName = thElev + 'e' + ('00' + angle).slice(-3) + 'a.json'
+    $.getJSON('/json/' + hrtfFileName,
       (data) ->
         hrtfL = []
         hrtfR = []
@@ -174,6 +189,14 @@
               convol()
               wav = btoa(src_wav.genWavHeader(resultWav.length) + resultWav)
               audio.src = 'data:audio/wav;base64,' + wav
+
+              fileName = 'bn_' + file.name
+              $('#audio_dl').unbind('click')
+              $('#audio_dl').attr({
+                download: fileName,
+                href: 'data:audio/wav;base64,' + wav
+              })
+
               $('#exec_button').attr('value', '実行する')
               $('#exec_button').css({
                 background: ''

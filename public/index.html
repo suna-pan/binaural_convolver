@@ -44,7 +44,7 @@
         <div class="audio_controller_box">
           <button class="audio_button" id="audio_play" type="button"><img src="icon_play.png" alt="再生"/></button>
           <button class="audio_button" id="audio_stop" type="button"><img src="icon_stop.png" alt="停止"/></button>
-          <button class="audio_button" id="audio_dl" type="button"><img src="icon_dl.png" alt="ダウンロード"/></button>
+          <a id="audio_dl" href=""><img class="audio_button" type="button" src="icon_dl.png" alt="ダウンロード"/></a>
         </div>
         <div id="audio_controller_bar" class="audio_controller_box">
            <p id="audio_volume_label">Vol:</p>
@@ -53,6 +53,7 @@
            <div id='audio_position'></div>
         </div>
       </div>
+      <p id='downlaod_notice'>※ダウンロードボタンをクリックしてから実際にダウンロードが開始されるまで時間がかかります。</p>
     </ul>
   </div> <!-- contient -->
 </div> <!-- main -->

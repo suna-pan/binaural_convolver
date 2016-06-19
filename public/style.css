@@ -87,6 +87,7 @@ button img {
   float: left;
   padding: 0;
   margin: 0;
+  margin-bottom: 20px;
 }
 
 
@@ -177,4 +178,10 @@ button img {
 
 #selected_filename {
   margin-left: 10px;
+}
+
+
+#downlaod_notice {
+  clear: both;
+  text-align: center;
 }
