@@ -121,3 +121,59 @@ button img {
   margin: 0;
   padding: 0;
 }
+
+
+#exec_button {
+  text-decoration: none;
+  font-size: 16pt;
+  color: #ffffff;
+  background: #505050;
+  border: 0px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+
+#exec_button:hover {
+  background: #202020;
+}
+
+
+#file_selecter_div{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+
+#file_selecter_label {
+  font-size: 16pt;
+  text-align: center;
+  color: #ffffff;
+  background: #505050;
+  border: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+
+#file_selecter_label:hover {
+  background: #202020;
+}
+
+
+#selected_filename {
+  margin-left: 10px;
+}
