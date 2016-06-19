@@ -126,6 +126,7 @@ button img {
 #exec_button {
   text-decoration: none;
   font-size: 16pt;
+  width: 140px;
   color: #ffffff;
   background: #505050;
   border: 0px;

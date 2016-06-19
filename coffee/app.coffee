@@ -4,7 +4,11 @@
 
   playing = false
   
-  audio = new Audio()
+
+  count    = 0
+  waveSize = 0
+  volume   = 1.0
+  audio    = new Audio()
 
   audio_pause = ->
     audio.pause()
@@ -47,6 +51,7 @@
       if header.fmtSamplingRate != 44100 || header.fmtBitPerSample != 16
         alert '16bit 44100Hz のWAVファイルを選択してください'
         filie = null
+      waveSize = Math.ceil(header.fmtWaveSize / 2 / header.fmtCh / 512)
 
     wav_load_fail = (code) ->
       if code == 1
@@ -58,10 +63,11 @@
 
 
   $('#exec_button').click ->
-    console.log('Start')
     if file == null
       alert 'ファイルを選択してください'
       return
+
+    $('#exec_button').prop('disabled', true)
 
     audio_pause();
     $('#audio_play').prop('disabled', true)
@@ -72,6 +78,9 @@
       value: 0
     })
     audio_update_time(true)
+    $('#audio_controller').css({
+      opacity: '0.3'
+    })
 
     $.getJSON('/json/0e270a.json',
       (data) ->
@@ -83,6 +92,8 @@
 
         loadWavFail = ->
           alert 'WAVファイルのロードに失敗しました'
+          $('#exec_button').prop('disabled', false)
+          $('#selected_filename').text('ファイルを選択してください')
           file = null
 
         oldBufL = []
@@ -91,6 +102,8 @@
         loadWavFirst = (last, result, refSize) ->
           if last
             alert 'ファイルが短すぎます'
+            $('#exec_button').prop('disabled', false)
+            $('#selected_filename').text('ファイルを選択してください')
             file = null
             return
 
@@ -98,10 +111,14 @@
             oldBufL.push(new Complex(i[0].re, i[0].im))
             oldBufR.push(new Complex(i[1].re, i[1].im))
 
+          $('#exec_button').attr('value', '処理中')
           count = 0
           loadWavLoop = (last, result, refSize) ->
             count++
-            console.log('loop ' + count)
+            progress = Math.floor(count / waveSize * 100)
+            $('#exec_button').css({
+              background: "linear-gradient(to right, #505050 0%, #505050 " +  progress+ "%, #202020 " + progress + "%, #202020 100%)"
+            });
 
             bufL = []
             bufR = []
@@ -156,7 +173,19 @@
               convol()
               wav = btoa(src_wav.genWavHeader(resultWav.length) + resultWav)
               audio.src = 'data:audio/wav;base64,' + wav
-
+              $('#exec_button').attr('value', '実行する')
+              $('#exec_button').css({
+                background: ''
+              });
+              $('#exec_button').prop('disabled', false)
+              $('#audio_play').prop('disabled', false)
+              $('#audio_stop').prop('disabled', false)
+              $('#audio_dl').prop('disabled', false)
+              $('#audio_controller').css({
+                opacity: ''
+              })
+              $('#selected_filename').text('ファイルを選択してください')
+              file = null
             else
               src_wav.next512(loadWavLoop, loadWavFail)
 
@@ -166,6 +195,8 @@
     ).fail(
       ->
         alert 'HRTFのダウンロードに失敗しました'
+        $('#exec_button').prop('disabled', false)
+        $('#selected_filename').text('ファイルを選択してください')
         file = null
     )
 
@@ -204,9 +235,10 @@
     max: 1000,
     step: 1,
     range: 'min',
-    change:
+    slide:
       (event, ui) ->
         audio.volume = ui.value / 1000
+        volume = audio.volume
   })
 
 
@@ -219,9 +251,6 @@
   audio.addEventListener('canplaythrough',
     ->
       audio_update_time(false)
-      $('#audio_play').prop('disabled', false)
-      $('#audio_stop').prop('disabled', false)
-      $('#audio_dl').prop('disabled', false)
   , false)
 
 
@@ -237,3 +266,16 @@
       audio_pause()
       audio.currentTime = 0
   , false)
+
+
+  $('#audio_controller').css({
+    opacity: '0.3'
+  })
+  $('#audio_play').prop('disabled', true)
+  $('#audio_stop').prop('disabled', true)
+  $('#audio_dl').prop('disabled', true)
+  $('#audio_position').slider({
+    max: 0,
+    value: 0
+  })
+
