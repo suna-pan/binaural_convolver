@@ -23,10 +23,17 @@
 }
 
 
+li {
+  font-size: 30px;
+  list-style-type: decimal;
+}
+
+
 #sound_source_div {
   width: 600px;
   height: 353px;
   margin: 0 auto;
+  margin-top: 30px;
   padding: 0;
 }
 
