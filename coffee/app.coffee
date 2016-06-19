@@ -129,7 +129,7 @@
         loadWavFail = ->
           alert 'failed to load waves.'
           $('#exec_button').prop('disabled', false)
-          $('#selected_filename').text('Choose file to process')
+          $('#selected_filename').text('Choose a file to process')
           file = null
 
         oldBufL = []
@@ -139,7 +139,7 @@
           if last
             alert 'This file is too short.'
             $('#exec_button').prop('disabled', false)
-            $('#selected_filename').text('Choose file to process')
+            $('#selected_filename').text('Choose a file to process')
             file = null
             return
 
@@ -238,7 +238,7 @@
       ->
         alert 'Failed to download HRTF.'
         $('#exec_button').prop('disabled', false)
-        $('#selected_filename').text('Choose file to process')
+        $('#selected_filename').text('Choose a file to process')
         file = null
     )
 

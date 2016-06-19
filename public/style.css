@@ -23,7 +23,38 @@
 }
 
 
-li {
+h2 {
+  font-size: 30px;
+  font-weight: normal;
+}
+
+
+a:link {
+  color: #202020;
+}
+
+
+a:visited {
+  color: #202020;
+}
+
+
+a:hover {
+  color: #202020;
+}
+
+
+a:active {
+  color: #202020;
+}
+
+
+#steps {
+  margin-top: 50px;
+}
+
+
+#steps li {
   font-size: 30px;
   list-style-type: decimal;
 }
@@ -213,4 +244,15 @@ button img {
 #downlaod_notice {
   clear: both;
   text-align: center;
+}
+
+
+#footer {
+  margin-top: 100px;
+  font-size: 12pt;
+}
+
+
+#footer li {
+  list-style-type: square;
 }
