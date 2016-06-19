@@ -42,16 +42,16 @@
 
     wav_load_sccuess = (header) ->
       if header.fmtSamplingRate != 44100 || header.fmtBitPerSample != 16
-        alert '16bit 44100Hz のWAVファイルを選択してください'
+        alert 'This format is not supported.(Support : 16bit 44100Hz)'
         filie = null
       waveSize = Math.ceil(header.fmtWaveSize / 2 / header.fmtCh / 512)
       $('#selected_filename').text(file.name)
 
     wav_load_fail = (code) ->
       if code == 1
-        alert '非対応ブラウザです'
+        alert 'Your Web Browser is not supported.'
       if code == 2
-        alert 'wavファイルを選択してください'
+        alert 'This file is not wav file.'
     
     src_wav.loadHeader(wav_load_sccuess, wav_load_fail)
 
@@ -77,7 +77,7 @@
     file = this.files[0]
     
     if file == null
-      alert 'ファイルを選択してください'
+      alert 'Please choose a file to process.'
       return
 
     file_open()
@@ -85,7 +85,7 @@
 
   $('#exec_button').click ->
     if file == null
-      alert 'ファイルを選択してください'
+      alert 'Please choose a file to process.'
       return
 
     $('#exec_button').prop('disabled', true)
@@ -127,9 +127,9 @@
           hrtfR.push(new Complex(data.hR[i].re, data.hR[i].im))
 
         loadWavFail = ->
-          alert 'WAVファイルのロードに失敗しました'
+          alert 'failed to load waves.'
           $('#exec_button').prop('disabled', false)
-          $('#selected_filename').text('ファイルを選択してください')
+          $('#selected_filename').text('Choose file to process')
           file = null
 
         oldBufL = []
@@ -137,9 +137,9 @@
         resultWav = ''
         loadWavFirst = (last, result, refSize) ->
           if last
-            alert 'ファイルが短すぎます'
+            alert 'This file is too short.'
             $('#exec_button').prop('disabled', false)
-            $('#selected_filename').text('ファイルを選択してください')
+            $('#selected_filename').text('Choose file to process')
             file = null
             return
 
@@ -147,7 +147,7 @@
             oldBufL.push(new Complex(i[0].re, i[0].im))
             oldBufR.push(new Complex(i[1].re, i[1].im))
 
-          $('#exec_button').attr('value', '処理中')
+          $('#exec_button').attr('value', '')
           count = 0
           loadWavLoop = (last, result, refSize) ->
             count++
@@ -217,7 +217,7 @@
                 href: 'data:audio/wav;base64,' + wav
               })
 
-              $('#exec_button').attr('value', '実行する')
+              $('#exec_button').attr('value', 'Start')
               $('#exec_button').css({
                 background: ''
               });
@@ -236,9 +236,9 @@
         src_wav.next512(loadWavFirst, loadWavFail)
     ).fail(
       ->
-        alert 'HRTFのダウンロードに失敗しました'
+        alert 'Failed to download HRTF.'
         $('#exec_button').prop('disabled', false)
-        $('#selected_filename').text('ファイルを選択してください')
+        $('#selected_filename').text('Choose file to process')
         file = null
     )
 
