@@ -4,7 +4,7 @@
 
   playing = false
   
-  audio = document.getElementById("audio")
+  audio = new Audio()
   
   $('#file_selecter').change ->
     file = this.files[0]
@@ -118,6 +118,7 @@
               convol()
               wav = btoa(src_wav.genWavHeader(resultWav.length) + resultWav)
               audio.src = 'data:audio/wav;base64,' + wav
+
             else
               src_wav.next512(loadWavLoop, loadWavFail)
 
@@ -150,3 +151,29 @@
       audio.currentTime = 0
       playing = false
   )
+
+
+  $('#audio_position').slider({
+    value: 0,
+    min: 0,
+    max: 0,
+    step: 1,
+    range: 'min',
+    stop:
+      (event, ui) ->
+        audio.currentTime = ui.value / 1000
+  })
+
+
+  audio.addEventListener('durationchange'
+    ->
+      $('#audio_position').slider({ max: Math.ceil(audio.duration * 1000)})
+      
+  , false)
+
+
+  audio.addEventListener('timeupdate'
+    ->
+      $('#audio_position').slider({ value: Math.ceil(audio.currentTime * 1000)})
+  , false)
+  

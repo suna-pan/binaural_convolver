@@ -77,3 +77,20 @@ button img {
   display: block;
 }
 
+
+#audio_contorller {
+  overflow: hidden;
+}
+
+
+.audio_controller_box {
+  float: left;
+  border: 1px solid #202020;
+}
+
+
+#audio_controller_bar {
+  float: right;
+  width: 500px;
+  height: 70px;
+}

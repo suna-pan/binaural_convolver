@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <title>Binaural Comvolver</title>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="jquery-ui.min.css"/>
   <script src="ext_lib/jquery-3.0.0.min.js"></script>
   <script src="ext_lib/jQueryRotate.js"></script>
   <script src="ext_lib/jquery-ui.min.js"></script>
@@ -40,13 +41,20 @@
 
     <li>処理を実行する</li>
       <input id="exec_button" type="button" value="実行する" />
-      <button class="audio_button" id="audio_play" type="button"><img src="icon_play.png" alt="再生"/></button>
-      <button class="audio_button" id="audio_stop" type="button"><img src="icon_stop.png" alt="停止"/></button>
-      <button class="audio_button" id="audio_dl" type="button"><img src="icon_dl.png" alt="ダウンロード"/></button>
+      <div id="audio_controller">
+        <div class="audio_controller_box">
+          <button class="audio_button" id="audio_play" type="button"><img src="icon_play.png" alt="再生"/></button>
+          <button class="audio_button" id="audio_stop" type="button"><img src="icon_stop.png" alt="停止"/></button>
+          <button class="audio_button" id="audio_dl" type="button"><img src="icon_dl.png" alt="ダウンロード"/></button>
+        </div>
+        <div id="audio_controller_bar" class="audio_controller_box">
+           <div id='audio_position'></div>
+           <p id="audio_time">0:00/0:00</p>
+        </div>
+      </div>
     </ul>
   </div> <!-- contient -->
-        <audio id="audio" controls/>
-</div> <!-- main >
+</div> <!-- main -->
 
 </body>
 </html>
