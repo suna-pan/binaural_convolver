@@ -1,6 +1,8 @@
 ﻿$ ->
   file = null
   src_wav = null
+
+  playing = false
   
   audio = document.getElementById("audio")
   
@@ -27,7 +29,7 @@
     src_wav.loadHeader(wav_load_sccuess, wav_load_fail)
 
 
-  $('#exec').click ->
+  $('#exec_button').click ->
     console.log('Start')
     if file == null
       alert 'ファイルを選択してください'
@@ -127,3 +129,24 @@
         alert 'HRTFのダウンロードに失敗しました'
         file = null
     )
+
+
+  $('#audio_play').click(
+    (e) ->
+      if playing
+        audio.pause()
+        playing = false
+        $('#audio_play').children('img').attr('src', 'icon_play.png')
+      else
+        audio.play()
+        playing = true
+        $('#audio_play').children('img').attr('src', 'icon_pause.png')
+  )
+
+
+  $('#audio_stop').click(
+    (e) ->
+      audio.pause()
+      audio.currentTime = 0
+      playing = false
+  )
