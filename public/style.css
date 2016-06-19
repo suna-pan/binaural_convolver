@@ -1,0 +1,39 @@
+﻿body {
+background: #ffffff;
+}
+
+.main {
+  width: 100%;
+}
+
+
+.contient {
+  width: 800px;
+  margin: 0 auto;
+}
+
+
+#sound_source_div {
+  width: 600px;
+  height: 353px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+
+#sound_source_area_listener {
+  opacity: 0;
+}
+
+
+#sound_source_guide {
+  opacity: 0.5;
+}
+
+
+.sound_source {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+

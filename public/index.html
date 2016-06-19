@@ -4,22 +4,37 @@
 <head>
   <meta charset="UTF-8" />
   <title>Binaural Comvolver</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
   <script src="ext_lib/jquery-3.0.0.min.js"></script>
+  <script src="ext_lib/jQueryRotate.js"></script>
   <script src="lib/complex.js"></script>
   <script src="lib/fft_constant.js"></script>
   <script src="lib/fft.js"></script>
   <script src="lib/wavfile.js"></script>
   <script src="lib/app.js"></script>
+  <script src="lib/ui.js"></script>
 </head>
 
 <body>
 
-<input type="file" id="file_selecter" name="file_selecter" />
-<input type="button" id="exec" value="Exec" />
 
-<br>
+<div class="main">
+  <input type="file" id="file_selecter" name="file_selecter" />
+  <input type="button" id="exec" value="Exec" />
 
-<audio id="audio" controls/>
+  <br>
+
+  <div class="contient">
+    <div id="sound_source_div">
+      <img id="sound_source_area" class="sound_source" src="./sound_source_area.png" />
+      <img id="sound_source_elev" class="sound_source" src="./sound_source.png" />
+      <img id="sound_source_angle" class="sound_source" src="./sound_source.png" />
+      <img id="sound_source_guide" class="sound_source" src="./sound_source.png" />
+      <img id="sound_source_area_listener" class="sound_source" src="./sound_source_area.png" />
+    </div> <!-- sound_source_div>
+  </div> <!-- contient -->
+  <audio id="audio" controls/>
+</div> <!-- main >
 
 </body>
 </html>
