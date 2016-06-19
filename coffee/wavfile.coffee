@@ -124,6 +124,7 @@ class window.WavFile
         
     if @current - (WAV_HEADER_LENGTH - 1) >= @header.fmtWaveSize
       last = true
+      @current = WAV_HEADER_LENGTH - 1
 
     if @file.webkitSlice
       blob = @file.webkitSlice(start, stop)

@@ -208,8 +208,6 @@
               $('#audio_controller').css({
                 opacity: ''
               })
-              $('#selected_filename').text('ファイルを選択してください')
-              file = null
             else
               src_wav.next512(loadWavLoop, loadWavFail)
 
