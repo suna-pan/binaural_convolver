@@ -198,6 +198,18 @@
   })
 
 
+  $('#audio_volume').slider({
+    value: 1000,
+    min: 0,
+    max: 1000,
+    step: 1,
+    range: 'min',
+    change:
+      (event, ui) ->
+        audio.volume = ui.value / 1000
+  })
+
+
   audio.addEventListener('durationchange',
     ->
       $('#audio_position').slider({ max: Math.ceil(audio.duration * 1000)})

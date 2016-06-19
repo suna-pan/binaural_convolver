@@ -85,7 +85,8 @@ button img {
 
 .audio_controller_box {
   float: left;
-  border: 1px solid #202020;
+  padding: 0;
+  margin: 0;
 }
 
 
@@ -93,4 +94,30 @@ button img {
   float: right;
   width: 500px;
   height: 70px;
+}
+
+
+#audio_volume_label {
+  display: inline-block;
+  width: 390px;
+  text-align: right;
+  font-size: 10pt;
+  margin: 0;
+  padding: 0;
+}
+
+
+#audio_volume {
+  width: 100px;
+  float: right;
+  margin-bottom: 20px;
+}
+
+
+#audio_time {
+  clear:both;
+  text-align: right;
+  font-size: 10pt;
+  margin: 0;
+  padding: 0;
 }
