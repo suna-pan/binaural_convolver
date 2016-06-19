@@ -1,0 +1,4 @@
+﻿Gemfile.lock
+*.swp
+public/lib/
+.vscode

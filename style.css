@@ -1,0 +1,258 @@
+﻿body {
+  background: #ffffff;
+  color: #505050;
+  font-family: 'Maven Pro', sans-serif;
+}
+
+.main {
+  width: 100%;
+  padding-top: 30px;
+}
+
+
+.contient {
+  width: 800px;
+  margin: 0 auto;
+}
+
+
+#logo {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+
+h2 {
+  font-size: 30px;
+  font-weight: normal;
+}
+
+
+a:link {
+  color: #202020;
+}
+
+
+a:visited {
+  color: #202020;
+}
+
+
+a:hover {
+  color: #202020;
+}
+
+
+a:active {
+  color: #202020;
+}
+
+
+#steps {
+  margin-top: 50px;
+}
+
+
+#steps li {
+  font-size: 30px;
+  list-style-type: decimal;
+}
+
+
+#sound_source_div {
+  width: 600px;
+  height: 353px;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 0;
+}
+
+
+#sound_source_area_listener {
+  opacity: 0;
+}
+
+
+#sound_source_guide {
+  opacity: 0.5;
+}
+
+
+.sound_source {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+
+#file_selecter {
+  display: none;
+}
+
+
+#selected_filename {
+  display: inline;
+}
+
+
+#drop_zone {
+  text-align: center;
+  color: #505050;
+  font-size: 12pt;
+  border: 1px dashed #505050;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+
+.audio_button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  opacity: 0.8;
+}
+
+
+.audio_button:hover {
+  opacity: 1.0;
+}
+
+.audio_button:active {
+  position: relative;
+}
+
+
+button img {
+  display: block;
+}
+
+
+#exec_button {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+
+#audio_contorller {
+  overflow: hidden;
+}
+
+
+.audio_controller_box {
+  float: left;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+
+#audio_controller_bar {
+  float: right;
+  width: 500px;
+  height: 70px;
+}
+
+
+#audio_volume_label {
+  display: inline-block;
+  width: 390px;
+  text-align: right;
+  font-size: 10pt;
+  margin: 0;
+  padding: 0;
+}
+
+
+#audio_volume {
+  width: 100px;
+  float: right;
+  margin-bottom: 20px;
+}
+
+
+#audio_time {
+  clear:both;
+  text-align: right;
+  font-size: 10pt;
+  margin: 0;
+  padding: 0;
+}
+
+
+#exec_button {
+  text-decoration: none;
+  font-size: 16pt;
+  width: 140px;
+  color: #ffffff;
+  background: #505050;
+  border: 0px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+
+#exec_button:hover {
+  background: #202020;
+}
+
+
+#file_selecter_div{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+
+#file_selecter_label {
+  font-size: 16pt;
+  text-align: center;
+  color: #ffffff;
+  background: #505050;
+  border: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+
+#file_selecter_label:hover {
+  background: #202020;
+}
+
+
+#selected_filename {
+  margin-left: 10px;
+}
+
+
+#downlaod_notice {
+  clear: both;
+  text-align: center;
+}
+
+
+#footer {
+  margin-top: 100px;
+  font-size: 12pt;
+}
+
+
+#footer li {
+  list-style-type: square;
+}

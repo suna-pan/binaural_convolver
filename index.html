@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Binaural Comvolver</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="jquery-ui.min.css">
+  <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Maven+Pro'>
+  <script src="ext_lib/jquery-3.0.0.min.js"></script>
+  <script src="ext_lib/jQueryRotate.js"></script>
+  <script src="ext_lib/jquery-ui.min.js"></script>
+  <script src="lib/complex.js"></script>
+  <script src="lib/fft_constant.js"></script>
+  <script src="lib/fft.js"></script>
+  <script src="lib/wavfile.js"></script>
+  <script src="lib/ui.js"></script>
+  <script src="lib/app.js"></script>
+</head>
+
+<body>
+
+
+<div class="main">
+  <div class="contient">
+  <img id="logo" src="logo.png" alt="binaural convolver" />
+
+<h2>Create Binaural Sounds</h2>
+<p>
+With this app, you can make a sound which resembles it recorded in stereo with binaural microphones. Your WAV file recorded in stereo or monoral will be convolved with a Head-Related Transfer Function (HRTF). 
+</p>
+<p>
+This app does NOT upload your WAV file. Get HRTF from server and process in your local system.
+</p>
+
+<h2>HRTF</h2>
+<p>
+This app uses HRTFs measured by Itakura Laboratory and CIAIR. 
+</p>
+<p>
+<a href="http://www.sp.m.is.nagoya-u.ac.jp/HRTF/">http://www.sp.m.is.nagoya-u.ac.jp/HRTF/</a>
+ : HRTF database -> HRTF data (2)
+</p>
+
+
+  <ul id="steps">
+    <li>Choose a File to Process</li>
+      <div id="file_selecter_div">
+        <label id="file_selecter_label" for="file_selecter">Open<input type="file" id="file_selecter" name="file_selecter" /></label>
+        <p id="selected_filename">Choose a file to process</p>
+      </div>
+      <div id="drop_zone">Drop a file here</div>
+
+    <li>Choose Sound Source Position</li>
+      <div id="sound_source_div">
+        <img id="sound_source_area" class="sound_source" src="./sound_source_area.png" />
+        <img id="sound_source_elev" class="sound_source" src="./sound_source.png" />
+        <img id="sound_source_angle" class="sound_source" src="./sound_source.png" />
+        <img id="sound_source_guide" class="sound_source" src="./sound_source.png" />
+        <img id="sound_source_area_listener" class="sound_source" src="./sound_source_area.png" />
+      </div> <!-- sound_source_div -->
+
+      <input id="exec_button" type="button" value="Start" />
+      <div id="audio_controller">
+        <div class="audio_controller_box">
+          <button class="audio_button" id="audio_play" type="button"><img src="icon_play.png" alt="Play/Pause"/></button>
+          <button class="audio_button" id="audio_stop" type="button"><img src="icon_stop.png" alt="Stop"/></button>
+          <a id="audio_dl" href=""><img class="audio_button" type="button" src="icon_dl.png" alt="Download"/></a>
+        </div>
+        <div id="audio_controller_bar" class="audio_controller_box">
+           <p id="audio_volume_label">Vol:</p>
+           <div id='audio_volume'></div>
+           <p id="audio_time">00:00/00:00</p>
+           <div id='audio_position'></div>
+        </div>
+      </div>
+      <p id='downlaod_notice'>Download operation will take a lot of time.</p>
+  </ul>
+
+
+  <ul id="footer">
+    <li>Code</li>
+      <p>&copy; 2016 suna_pan <a href="https://github.com/suna-pan/binaural_convolver">https://github.com/suna-pan/binaural_convolver</a></p>
+      <p><a href="https://twitter.com/suna_pan">Twitter</a> / <a href="https://github.com/suna-pan">GitHub</a></p>
+    <li>HRTF</li>
+      <p>&copy; 1999 Itakura Laboratory and CIAIR <a href="http://www.sp.m.is.nagoya-u.ac.jp/HRTF/">http://www.sp.m.is.nagoya-u.ac.jp/HRTF/</a></p>
+    <li>Libraries</li>
+      <p>jQuery <a href="https://jquery.com/">https://jquery.com/</a></p>
+      <p>&copy; 2016 The jQuery Foundation <a href="https://jquery.org/license/">jQuery License</a></p>
+      <p>JQueryRotate <a href="http://jqueryrotate.com/">http://jqueryrotate.com/</a></p>
+      <p>&copy; 2013 Wilq32 <a href="https://opensource.org/licenses/mit-license.php">MIT license</a></p>
+      <p>jQuery UI <a href="https://jqueryui.com/">https://jqueryui.com/</a></p>
+      <p>&copy; 2016 The jQuery Foundation <a href="https://jquery.org/license/">jQuery License</a></p>
+  </ul>
+
+
+  </div> <!-- contient -->
+</div> <!-- main -->
+
+
+</body>
+</html>
