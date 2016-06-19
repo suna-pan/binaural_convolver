@@ -37,3 +37,43 @@ background: #ffffff;
   position: absolute;
 }
 
+
+#file_selecter {
+  display: none;
+}
+
+
+#selected_filename {
+  display: inline;
+}
+
+
+.audio_button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  opacity: 0.8;
+}
+
+
+.audio_button:hover {
+  opacity: 1.0;
+}
+
+.audio_button:active {
+  position: relative;
+}
+
+
+button img {
+  display: block;
+}
+
+
+#exec_button {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+

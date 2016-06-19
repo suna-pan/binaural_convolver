@@ -19,21 +19,32 @@
 
 
 <div class="main">
-  <input type="file" id="file_selecter" name="file_selecter" />
-  <input type="button" id="exec" value="Exec" />
-
-  <br>
-
   <div class="contient">
-    <div id="sound_source_div">
-      <img id="sound_source_area" class="sound_source" src="./sound_source_area.png" />
-      <img id="sound_source_elev" class="sound_source" src="./sound_source.png" />
-      <img id="sound_source_angle" class="sound_source" src="./sound_source.png" />
-      <img id="sound_source_guide" class="sound_source" src="./sound_source.png" />
-      <img id="sound_source_area_listener" class="sound_source" src="./sound_source_area.png" />
-    </div> <!-- sound_source_div>
+  <ul id="steps">
+    <li>ファイルを選択する</li>
+      <label for="file_selecter">
+        参照
+        <input type="file" id="file_selecter" name="file_selecter" />
+      </label>
+      <p id="selected_filename">ファイルを選択してください</p>
+
+    <li>音源位置を設定する</li>
+      <div id="sound_source_div">
+        <img id="sound_source_area" class="sound_source" src="./sound_source_area.png" />
+        <img id="sound_source_elev" class="sound_source" src="./sound_source.png" />
+        <img id="sound_source_angle" class="sound_source" src="./sound_source.png" />
+        <img id="sound_source_guide" class="sound_source" src="./sound_source.png" />
+        <img id="sound_source_area_listener" class="sound_source" src="./sound_source_area.png" />
+      </div> <!-- sound_source_div -->
+
+    <li>処理を実行する</li>
+      <input id="exec_button" type="button" value="実行する" />
+      <button class="audio_button" id="audio_play" type="button"><img src="icon_play.png" alt="再生"/></button>
+      <button class="audio_button" id="audio_stop" type="button"><img src="icon_stop.png" alt="停止"/></button>
+      <button class="audio_button" id="audio_dl" type="button"><img src="icon_dl.png" alt="ダウンロード"/></button>
+    </ul>
   </div> <!-- contient -->
-  <audio id="audio" controls/>
+        <audio id="audio" controls/>
 </div> <!-- main >
 
 </body>
