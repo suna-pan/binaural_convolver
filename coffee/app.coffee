@@ -52,6 +52,7 @@
         alert '16bit 44100Hz のWAVファイルを選択してください'
         filie = null
       waveSize = Math.ceil(header.fmtWaveSize / 2 / header.fmtCh / 512)
+      $('#selected_filename').text(file.name)
 
     wav_load_fail = (code) ->
       if code == 1
