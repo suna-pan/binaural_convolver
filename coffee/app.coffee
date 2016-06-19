@@ -37,14 +37,7 @@
       ms = 0
     $('#audio_time').text(('0' + cm).slice(-2) + ':' + ('0' + cs).slice(-2) + '/' + ('0' + mm).slice(-2) + ':' + ('0' + ms).slice(-2))
 
-  
-  $('#file_selecter').change ->
-    file = this.files[0]
-    
-    if file == null
-      alert 'ファイルを選択してください'
-      return
-    
+  file_open = ->
     src_wav = new window.WavFile(file)
 
     wav_load_sccuess = (header) ->
@@ -61,6 +54,33 @@
         alert 'wavファイルを選択してください'
     
     src_wav.loadHeader(wav_load_sccuess, wav_load_fail)
+
+
+  $('#drop_zone').on('drop',
+    (_e) ->
+      e = _e.originalEvent
+      e.stopPropagation()
+      e.preventDefault()
+      file = e.dataTransfer.files[0]
+      file_open()
+  )
+
+  $('#drop_zone').on('dragover',
+    (_e) ->
+      e = _e.originalEvent
+      e.stopPropagation()
+      e.preventDefault()
+      e.dataTransfer.dropEffect = 'copy'
+  )
+  
+  $('#file_selecter').change ->
+    file = this.files[0]
+    
+    if file == null
+      alert 'ファイルを選択してください'
+      return
+
+    file_open()
 
 
   $('#exec_button').click ->

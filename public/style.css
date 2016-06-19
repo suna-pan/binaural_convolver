@@ -1,5 +1,6 @@
 ﻿body {
-background: #ffffff;
+  background: #ffffff;
+  color: #505050;
 }
 
 .main {
@@ -45,6 +46,18 @@ background: #ffffff;
 
 #selected_filename {
   display: inline;
+}
+
+
+#drop_zone {
+  text-align: center;
+  color: #505050;
+  font-size: 12pt;
+  border: 1px dashed #505050;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 
